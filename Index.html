@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Health Dashboard - 7 Days Tracker</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts: Prompt -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background-color: #f8fafc;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-800">แดชบอร์ดสุขภาพส่วนตัว (7 วันย้อนหลัง)</h1>
+        <p class="text-sm text-slate-500 mt-1">สรุปผลการออกกำลังกาย การนอนหลับ และการดื่มน้ำประจำสัปดาห์</p>
+      </div>
+      <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
+        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
+          น้ำหนักตัว: 85 กก.
+        </span>
+        <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100">
+          เป้าหมายออกกำลังกาย: 5 วัน/สัปดาห์
+        </span>
+      </div>
+    </header>
+
+    <!-- KPI Cards (4 ตัว) -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <!-- KPI 1: จำนวนวันออกกำลังกาย -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-slate-500">จำนวนวันออกกำลังกาย</span>
+          <span class="p-2 bg-emerald-50 text-emerald-600 rounded-lg">🏃‍♂️</span>
+        </div>
+        <div class="mt-3 flex items-baseline gap-2">
+          <span id="kpi-days" class="text-3xl font-bold text-slate-800">5</span>
+          <span class="text-sm text-slate-500">/ 5 วัน</span>
+        </div>
+        <p id="kpi-days-status" class="mt-2 text-xs font-medium text-emerald-600">✓ บรรลุเป้าหมายประจำสัปดาห์</p>
+      </div>
+
+      <!-- KPI 2: เวลารวม -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-slate-500">เวลาออกกำลังกายรวม</span>
+          <span class="p-2 bg-amber-50 text-amber-600 rounded-lg">⏱️</span>
+        </div>
+        <div class="mt-3 flex items-baseline gap-2">
+          <span id="kpi-minutes" class="text-3xl font-bold text-slate-800">210</span>
+          <span class="text-sm text-slate-500">นาที</span>
+        </div>
+        <p id="kpi-minutes-status" class="mt-2 text-xs font-medium text-emerald-600">✓ เกินเกณฑ์มาตรฐาน 150 นาที/สัปดาห์</p>
+      </div>
+
+      <!-- KPI 3: ชั่วโมงนอนเฉลี่ย -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-slate-500">ชั่วโมงนอนเฉลี่ย</span>
+          <span class="p-2 bg-purple-50 text-purple-600 rounded-lg">🌙</span>
+        </div>
+        <div class="mt-3 flex items-baseline gap-2">
+          <span id="kpi-sleep" class="text-3xl font-bold text-slate-800">7.36</span>
+          <span class="text-sm text-slate-500">ชม./วัน</span>
+        </div>
+        <p id="kpi-sleep-status" class="mt-2 text-xs font-medium text-emerald-600">✓ อยู่ในเกณฑ์ดี (7-8 ชม.)</p>
+      </div>
+
+      <!-- KPI 4: น้ำเฉลี่ย -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-slate-500">ปริมาณน้ำดื่มเฉลี่ย</span>
+          <span class="p-2 bg-sky-50 text-sky-600 rounded-lg">💧</span>
+        </div>
+        <div class="mt-3 flex items-baseline gap-2">
